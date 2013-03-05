@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>SwissMaps</title>
+    <title>Swiss BFS Maps</title>
     <meta charset="UTF-8"/>
     <link href="http://netdna.bootstrapcdn.com/bootswatch/2.3.0/cosmo/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -10,6 +10,7 @@
     .canton-boundary { stroke-width: 1px;  } 
     .land-boundary { stroke-width: 2px; }
     .municipality-boundary { stroke: #aaa; }
+    .footer { padding: 30px 0; margin-top: 70px; border-top: 1px solid #e5e5e5; background-color: #f5f5f5; }
     </style> 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>  
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -104,17 +105,18 @@ LIMIT 10000
 
 
 
-      <!-- Please leave a link to the Sgvizler homepage  
-    <div id="footer">
-      <p>
-	Sgvizler visualizes the result of SPARQL SELECT queries using
-	javascript and the Google Visualization API. For more
-	information, see
-	the <a href="http://sgvizler.googlecode.com/">Sgvizler</a>
-	homepage. (c)
-	2011 Martin G. Skj&#230;veland.
-      </p>
-    </div>-->
     </div>
+    <!-- Please leave a link to the Sgvizler homepage  -->
+    <footer class="footer">
+      <div class="container">
+      <p>Powered by:<small>
+        <ul>
+          <li><a href="http://sgvizler.googlecode.com/">Sgvizler</a> &copy; 2011 Martin G. Skj&#230;veland.  </li>
+          <li><a href="http://twitter.github.com/bootstrap/">Bootstrap</a></li>
+          <li><a href="http://d3js.org/">d3.js</a> &copy; 2012 Michael Bostock</li>
+        </ul>
+      </small></p>
+      </div>
+    </footer>
   </body>
 </html>
