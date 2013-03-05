@@ -25,7 +25,8 @@
           .defaultEndpointOutputFormat('xml')
 	  .prefix('gz', 'http://data.gemeindezukunft.ch/vocab/') 
           .prefix('geo',  'http://www.w3.org/2003/01/geo/wgs84_pos#')
-          .prefix('dbp',  'http://dbpedia.org/resource/');
+          .prefix('dbp',  'http://dbpedia.org/resource/')
+          .prefix('xsd', 'http://www.w3.org/2001/XMLSchema#');
       
       //// Leave this as is. Ready, steady, go!
       $(document).ready(sgvizler.containerDrawAll);
@@ -38,6 +39,7 @@
     <h2>Choropleth: Inhabitants per Municipality</h2>
 
     <div id="municipalities1"
+	 data-sgvizler-chart-options="domainmin=400|domainmax=300000|colormin=white|colormax=red" 
 	 data-sgvizler-query='
 SELECT (strafter(str(?remuniuri), "CL_HGDE_GDE/") AS ?remuniid) ?allnumber
 WHERE
@@ -64,27 +66,34 @@ LIMIT 10000
 	 data-sgvizler-chart="sgvizler.visualization.swisschoropleth"
 	 data-sgvizler-log="2"></div>
 
-    <h2>Choropleth: Sex Ratio per Municipality</h2>
+    <h2>Choropleth: Average Age per Municipality</h2>
 
     <div id="municipalities2"
+	 data-sgvizler-chart-options="domainmin=30|domainmax=50|colormin=white|colormax=darkred" 
 	 data-sgvizler-query='
-SELECT (strafter(str(?remuniuri), "CL_HGDE_GDE/") AS ?remuniid) ?allnumber
+SELECT (strafter(str(?remuniuri), "CL_HGDE_GDE/") AS ?remuniid) ((?avgnew / ?numberall2) AS ?allavg) 
+
 WHERE
 {
-{
-SELECT (SUM(?number) AS ?allnumber) ?remuniuri
+
+SELECT (SUM(?numberall * ?ageamount) AS ?avgnew) (SUM(?numberall) AS ?numberall2) ?remuniuri
+
 WHERE
 {
-?s <http://data.gemeindezukunft.ch/bfs/property/NB_PERSON> ?number;
+
+SELECT (SUM(?number) AS ?numberall) ?remuniuri (xsd:int(strafter(str(?age), "CL_AGE_0TO120/")) AS ?ageamount)
+WHERE
+{
+?s1 <http://data.gemeindezukunft.ch/bfs/property/NB_PERSON> ?number;
 <http://data.gemeindezukunft.ch/bfs/property/REPORTINGMUNICIPALITYID> ?remuniuri;
-<http://data.gemeindezukunft.ch/bfs/property/HISTREPORTINGMUNICIPALITYID> ?muniuri.
+<http://data.gemeindezukunft.ch/bfs/property/AGE> ?age.
 
-
-#?muniid <http://purl.org/linked-data/xkos#isPartOf> ?district.
-#?district <http://purl.org/linked-data/xkos#isPartOf> ?canton.
 }
+GROUP BY ?remuniuri ?age
+}
+
 GROUP BY ?remuniuri
-}
+
 }
 
 LIMIT 10000

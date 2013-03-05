@@ -3,7 +3,7 @@
 sgvizler.visualization.swisschoropleth = function(container) {this.container = container;};
 sgvizler.visualization.swisschoropleth.prototype = {
      id:   "swisschoropleth",
-     draw: function(data, chartOpt) {
+     draw: function(data, opt) {
 
 var width = 960,
     height = 500;
@@ -28,8 +28,8 @@ var svg = d3.select(this.container).append("svg")
     .attr("height", height);
 
 var fill = d3.scale.log()
-    .domain([400, 300000])
-    .range(["white", "red"]);
+    .domain([opt.domainmin, opt.domainmax])
+    .range([opt.colormin, opt.colormax]);
 
 
 
