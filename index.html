@@ -75,7 +75,6 @@ LIMIT 10000
     <div id="municipalities2"
 	 data-sgvizler-chart-options="domainmin=30|domainmax=50|colormin=white|colormax=darkred" 
 	 data-sgvizler-query='
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT ?remuniid (((FLOOR(?avgnew / ?numberall2 * 100)) / 100) AS ?allavg)
 WHERE
     {
