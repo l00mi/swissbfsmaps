@@ -57,7 +57,7 @@ SELECT (SUM(?number) AS ?allnumber) ?remuniuri
 
 
     ?ptype <http://www.w3.org/2004/02/skos/core#notation> ?pnumber.
-    FILTER ((xsd:int(?pnumber)) <= 2)
+    FILTER ((xsd:integer(?pnumber)) <= 2)
 
     }
     GROUP BY ?remuniuri
@@ -98,9 +98,9 @@ WHERE
             ?age <http://www.w3.org/2004/02/skos/core#notation> ?agelit.
 
             ?ptype <http://www.w3.org/2004/02/skos/core#notation> ?pnumber.
-            FILTER ((xsd:int(?pnumber)) <= 2)
+            FILTER ((xsd:integer(?pnumber)) <= 2)
             
-            BIND(xsd:int(?agelit) AS ?ageamount)
+            BIND(xsd:integer(?agelit) AS ?ageamount)
             }
         GROUP BY ?remuniuri ?agelit ?ageamount
         }
@@ -134,7 +134,7 @@ SELECT (((SUM(IF(?sex=<http://data.admin.ch/bfs/code/1.0/CL_SEX/2>,?number,0))) 
 
 
     ?ptype <http://www.w3.org/2004/02/skos/core#notation> ?pnumber.
-    FILTER ((xsd:int(?pnumber)) <= 2)
+    FILTER ((xsd:integer(?pnumber)) <= 2)
 
     }
     GROUP BY ?remuniuri
